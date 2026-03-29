@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kshthriya Nets & Ropes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --deep:       #060F1E;
+  --abyss:      #091525;
+  --navy:       #0D1F3C;
+  --ocean:      #0A3159;
+  --teal:       #0B6E7A;
+  --teal-mid:   #0E8C99;
+  --aqua:       #12B5C4;
+  --foam:       #7EDDE8;
+  --seafoam:    #B2EEF4;
+  --sand:       #E8D5A3;
+  --sand-light: #F5EDCC;
+  --cream:      #F8F4EA;
+  --muted:      #5B8FA8;
+  --border:     rgba(18,181,196,0.2);
+  --border-dim: rgba(18,181,196,0.07);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--deep); color: var(--cream); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 6%;
+  background: rgba(6,15,30,0.9); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-dim);
+}
+.logo-wrap { line-height: 1.1; }
+.logo-name { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; color: var(--seafoam); display: block; }
+.logo-tag { font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--aqua); }
+.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+.nav-links a { font-size: 0.78rem; letter-spacing: 0.06em; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+.nav-links a:hover { color: var(--aqua); }
+.nav-cta { background: var(--teal-mid) !important; color: #fff !important; padding: 0.48rem 1.3rem; border-radius: 100px; font-weight: 600; }
+.nav-cta:hover { background: var(--aqua) !important; transform: translateY(-1px); }
+
+/* HERO */
+.hero { min-height: 100vh; position: relative; overflow: hidden; display: flex; align-items: center; padding: 9rem 6% 5rem; }
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 65% 55% at 72% 38%, rgba(11,110,122,0.28) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 65% at 15% 85%, rgba(10,49,89,0.45) 0%, transparent 60%),
+    linear-gradient(165deg, var(--abyss) 0%, var(--deep) 55%, #030C17 100%);
+}
+.hero-dots { position: absolute; inset: 0; z-index: 0; opacity: 0.025; background-image: radial-gradient(var(--aqua) 1px, transparent 1px); background-size: 36px 36px; }
+.hero-glow { position: absolute; top: 15%; right: 0; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(18,181,196,0.08) 0%, transparent 65%); pointer-events: none; z-index: 0; }
+
+/* wave */
+.wave-wrap { position: absolute; bottom: 0; left: 0; right: 0; z-index: 1; overflow: hidden; height: 200px; }
+.wave-wrap svg { width: 200%; display: block; animation: wavemove 10s linear infinite; } /* Changed from 14s to 10s for faster movement */
+.wave-wrap svg.w2 { position: absolute; bottom: 0; left: 0; animation: wavemove 14s linear infinite reverse; opacity: 0.8; } /* Changed from 20s to 14s, increased opacity */
+@keyframes wavemove { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+.bubble { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(18,181,196,0.12), transparent 70%); animation: rise linear infinite; z-index: 0; }
+.b1 { width: 280px; height: 280px; left: 8%; bottom: 5%; animation-duration: 22s; }
+.b2 { width: 160px; height: 160px; left: 55%; bottom: 10%; animation-duration: 16s; animation-delay: -6s; }
+.b3 { width: 200px; height: 200px; left: 82%; bottom: 15%; animation-duration: 28s; animation-delay: -12s; }
+@keyframes rise { 0%{transform:translateY(0) scale(1);opacity:.5} 100%{transform:translateY(-110vh) scale(1.6);opacity:0} }
+
+.hero-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: center; width: 100%; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--aqua); border: 1px solid var(--border);
+  padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.8rem;
+  animation: fadeUp 0.7s ease both;
+}
+.pdot { width: 6px; height: 6px; border-radius: 50%; background: var(--aqua); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.35;transform:scale(.65)} }
+
+.hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem,5.5vw,5rem); font-weight: 700; line-height: 1.06; color: #fff; margin-bottom: 1.5rem; animation: fadeUp 0.7s .1s ease both; }
+.hero h1 em { font-style: italic; color: var(--aqua); }
+.hero h1 .sand { color: var(--sand); }
+.hero-desc { font-size: 1rem; line-height: 1.85; color: var(--muted); max-width: 460px; margin-bottom: 2.2rem; animation: fadeUp 0.7s .2s ease both; }
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.7s .3s ease both; }
+
+.btn-wa { display: inline-flex; align-items: center; gap: 0.6rem; background: #25D366; color: #fff; padding: .82rem 1.8rem; border-radius: 100px; font-size: .88rem; font-weight: 600; text-decoration: none; transition: background .3s, transform .2s; }
+.btn-wa:hover { background: #1eb358; transform: translateY(-2px); }
+.btn-outline { display: inline-flex; align-items: center; gap: .5rem; background: transparent; color: var(--seafoam); padding: .82rem 1.8rem; border-radius: 100px; border: 1px solid rgba(178,238,244,.22); font-size: .88rem; font-weight: 500; text-decoration: none; transition: border-color .3s, color .3s; }
+.btn-outline:hover { border-color: var(--aqua); color: var(--aqua); }
+
+/* hero cards */
+.hero-cards { display: flex; flex-direction: column; gap: 1rem; animation: fadeIn 1s .5s ease both; }
+.hcard { background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 14px; padding: 1.2rem 1.5rem; backdrop-filter: blur(10px); display: flex; align-items: center; gap: 1rem; transition: border-color .3s, transform .3s; }
+.hcard:hover { border-color: rgba(18,181,196,.4); transform: translateX(-6px); }
+.hcard-icon { font-size: 1.7rem; flex-shrink: 0; }
+.hcard-title { font-size: .88rem; font-weight: 600; color: var(--seafoam); margin-bottom: .2rem; }
+.hcard p { font-size: .75rem; color: var(--muted); line-height: 1.5; }
+
+/* TRUST BAR */
+.trust-bar { background: var(--navy); border-top: 1px solid var(--border-dim); border-bottom: 1px solid var(--border-dim); padding: 2rem 6%; display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 2rem; }
+.tstat { text-align: center; }
+.tstat-num { font-family: 'Playfair Display', serif; font-size: 2.1rem; font-weight: 600; color: var(--aqua); line-height: 1; }
+.tstat-lbl { font-size: .68rem; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); margin-top: .3rem; }
+.tdiv { width: 1px; height: 44px; background: var(--border-dim); }
+
+/* SECTIONS */
+.sec { padding: 6rem 6%; }
+.sec-label { font-size: .65rem; letter-spacing: .22em; text-transform: uppercase; color: var(--aqua); margin-bottom: .8rem; }
+.sec-title { font-family: 'Playfair Display', serif; font-size: clamp(1.9rem,3.5vw,2.9rem); font-weight: 600; color: #fff; line-height: 1.15; }
+.sec-title em { font-style: italic; color: var(--foam); }
+
+/* ABOUT */
+.about-sec { background: var(--abyss); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 1rem; }
+.about-left p { font-size: .97rem; line-height: 1.9; color: var(--muted); margin-top: 1.2rem; }
+.about-left p strong { color: var(--seafoam); font-weight: 600; }
+.pills { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; }
+.pill { font-size: .71rem; letter-spacing: .07em; background: rgba(18,181,196,.09); color: var(--aqua); border: 1px solid var(--border); border-radius: 100px; padding: .28rem .9rem; }
+.acard { background: rgba(10,49,89,.4); border: 1px solid var(--border-dim); border-radius: 12px; padding: 1.2rem 1.4rem; display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; transition: border-color .3s, background .3s; }
+.acard:hover { border-color: var(--border); background: rgba(18,181,196,.05); }
+.acard-icon { width: 36px; height: 36px; border-radius: 9px; background: rgba(18,181,196,.12); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+.acard h4 { font-size: .86rem; font-weight: 600; color: var(--seafoam); margin-bottom: .25rem; }
+.acard p { font-size: .77rem; color: var(--muted); line-height: 1.6; }
+
+/* NETS */
+.nets-sec { background: var(--deep); }
+.nets-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
+.ncard { background: var(--navy); border: 1px solid var(--border-dim); border-radius: 16px; padding: 2rem 1.8rem; position: relative; overflow: hidden; transition: border-color .3s, transform .3s; }
+.ncard::after { content:''; position: absolute; top:0; left:0; right:0; height:3px; background: linear-gradient(90deg,var(--teal),var(--aqua)); transform:scaleX(0); transform-origin:left; transition:transform .4s; }
+.ncard:hover { border-color: var(--border); transform: translateY(-5px); }
+.ncard:hover::after { transform: scaleX(1); }
+.nnum { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; color: rgba(18,181,196,.1); line-height: 1; margin-bottom: .8rem; }
+.ncard h3 { font-size: 1rem; font-weight: 600; color: var(--seafoam); margin-bottom: .75rem; }
+.ncard p { font-size: .81rem; line-height: 1.75; color: var(--muted); }
+.ntags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.2rem; }
+.ntag { font-size: .61rem; letter-spacing: .09em; text-transform: uppercase; background: rgba(18,181,196,.08); color: var(--foam); border: 1px solid var(--border); border-radius: 4px; padding: .2rem .6rem; }
+
+/* ROPES */
+.ropes-sec { background: var(--ocean); border-top: 1px solid var(--border-dim); border-bottom: 1px solid var(--border-dim); }
+.ropes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 1rem; }
+.ropes-left p { font-size: .95rem; line-height: 1.85; color: var(--muted); margin-top: 1.2rem; margin-bottom: 2rem; }
+.rope-list { display: flex; flex-direction: column; }
+.rope-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border-dim); transition: padding-left .3s; }
+.rope-item:hover { padding-left: .5rem; }
+.rope-item:last-child { border-bottom: none; }
+.rdot { width: 7px; height: 7px; border-radius: 50%; background: var(--aqua); flex-shrink: 0; }
+.rname { font-size: .88rem; font-weight: 600; color: var(--seafoam); flex: 1; }
+.rdesc { font-size: .76rem; color: var(--muted); }
+
+.rcard { background: rgba(6,15,30,.55); border: 1px solid var(--border-dim); border-radius: 14px; padding: 1.4rem; margin-bottom: 1.2rem; transition: border-color .3s; }
+.rcard:hover { border-color: var(--border); }
+.rcard-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.rcard h4 { font-size: .93rem; font-weight: 600; color: var(--seafoam); }
+.rbadge { font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; background: rgba(18,181,196,.12); color: var(--aqua); border: 1px solid var(--border); border-radius: 100px; padding: .2rem .7rem; }
+.rcard p { font-size: .79rem; color: var(--muted); line-height: 1.65; margin-bottom: 1rem; }
+.rspecs { display: flex; gap: 1.5rem; }
+.rsp { font-size: .73rem; }
+.rsp strong { display: block; color: var(--cream); font-weight: 600; font-size: .82rem; margin-bottom: .1rem; }
+.rsp span { color: var(--muted); }
+
+/* WHY */
+.why-sec { background: var(--abyss); }
+.why-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; margin-top: 3rem; }
+.wcard { background: rgba(10,49,89,.3); border: 1px solid var(--border-dim); border-radius: 14px; padding: 2rem 1.5rem; text-align: center; transition: border-color .3s, transform .3s; }
+.wcard:hover { border-color: var(--border); transform: translateY(-4px); }
+.wicon { font-size: 2rem; margin-bottom: 1rem; }
+.wnum { font-family: 'Playfair Display', serif; font-size: 2.1rem; font-weight: 600; color: var(--aqua); margin-bottom: .4rem; }
+.wcard h4 { font-size: .86rem; font-weight: 600; color: var(--seafoam); margin-bottom: .45rem; }
+.wcard p { font-size: .77rem; color: var(--muted); line-height: 1.65; }
+
+/* CTA */
+.cta-sec { background: var(--navy); position: relative; overflow: hidden; text-align: center; padding: 7rem 6%; }
+.cta-glow { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(11,110,122,.22) 0%, transparent 70%); }
+.cta-wavebot { position: absolute; bottom: 0; left: 0; right: 0; overflow: hidden; height: 90px; }
+.cta-wavebot svg { width: 200%; animation: wavemove 16s linear infinite; opacity: .18; }
+.cta-sec .sec-label { position: relative; z-index: 1; }
+.cta-sec h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,4.5vw,3.4rem); font-weight: 700; color: #fff; line-height: 1.12; position: relative; z-index: 1; margin: .8rem 0 1rem; }
+.cta-sec h2 em { font-style: italic; color: var(--aqua); }
+.cta-sec p { font-size: .97rem; color: var(--muted); max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.8; position: relative; z-index: 1; }
+.wa-big { display: inline-flex; align-items: center; gap: .8rem; background: #25D366; color: #fff; padding: 1rem 2.5rem; border-radius: 100px; font-family: 'DM Sans', sans-serif; font-size: .95rem; font-weight: 700; letter-spacing: .04em; text-decoration: none; position: relative; z-index: 1; box-shadow: 0 8px 32px rgba(37,211,102,.25); transition: background .3s, transform .2s, box-shadow .3s; }
+.wa-big:hover { background: #1eb358; transform: translateY(-3px); box-shadow: 0 12px 40px rgba(37,211,102,.35); }
+.wa-big svg { width: 22px; height: 22px; fill: #fff; }
+.cta-note { font-size: .72rem; color: var(--muted); margin-top: 1.2rem; position: relative; z-index: 1; }
+
+/* FOOTER */
+footer { background: var(--deep); border-top: 1px solid var(--border-dim); padding: 2rem 6%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.flogo-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--seafoam); font-weight: 600; display: block; }
+.flogo-sub { font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+footer p { font-size: .72rem; color: var(--muted); }
+
+/* ANIM */
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .75s ease, transform .75s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: .1s; }
+.d2 { transition-delay: .2s; }
+.d3 { transition-delay: .3s; }
+
+@media(max-width:960px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-cards{display:none}
+  .about-grid{grid-template-columns:1fr;gap:2.5rem}
+  .nets-grid{grid-template-columns:repeat(2,1fr)}
+  .ropes-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+  .nav-links li:not(:last-child){display:none}
+}
+@media(max-width:580px){
+  .nets-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .tdiv{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo-wrap">
+    <span class="logo-name">Kshthriya Nets &amp; Ropes</span>
+    <span class="logo-tag">Trusted · Quality · Ongole, AP</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#nets">Fishing Nets</a></li>
+    <li><a href="#ropes">Ropes</a></li>
+    <li><a href="#cta" class="nav-cta">Get Quote</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-glow"></div>
+  <div class="bubble b1"></div>
+  <div class="bubble b2"></div>
+  <div class="bubble b3"></div>
+  <div class="wave-wrap">
+    <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,50 C200,100 400,10 600,55 C800,100 1000,5 1200,50 C1350,80 1440,30 1440,50 L1440,120 L0,120 Z" fill="#0B6E7A" opacity="0.22"/>
+      <path d="M0,70 C180,30 380,90 580,60 C780,30 980,85 1180,55 C1330,35 1440,65 1440,65 L1440,120 L0,120 Z" fill="#0A3159" opacity="0.3"/>
+    </svg>
+    <svg class="w2" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,60 C220,110 440,15 660,60 C880,105 1100,10 1320,60 L1440,60 L1440,120 L0,120 Z" fill="#0E8C99" opacity="0.14"/>
+    </svg>
+  </div>
+
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><span class="pdot"></span>India's Trusted Nets &amp; Ropes Supplier</div>
+      <h1>Kshthriya Premium <em>Fishing Nets</em><br>&amp; <span class="sand">Quality Ropes</span><br>At Best Prices</h1>
+      <p class="hero-desc">Kshthriya Nets &amp; Ropes supplies top-grade fishing nets and ropes sourced directly from leading manufacturers — serving fishermen, retailers, and wholesalers across India.</p>
+      <div class="hero-btns">
+        <a href="https://wa.me/918106757893?text=Hello%20Kshthriya%20Nets%20%26%20Ropes!%20I%27d%20like%20to%20get%20a%20quote." target="_blank" class="btn-wa">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.558 4.112 1.528 5.832L.057 23.643a.5.5 0 0 0 .625.601l5.963-1.565A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.951 9.951 0 0 1-5.166-1.445l-.371-.22-3.547.93.957-3.455-.242-.378A9.955 9.955 0 0 1 2 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+          Get a Quote Now
+        </a>
+        <a href="#nets" class="btn-outline">View Products ↓</a>
+      </div>
+    </div>
+
+    <div class="hero-cards">
+      <div class="hcard">
+        <div class="hcard-icon">🎣</div>
+        <div><div class="hcard-title">All Types of Fishing Nets</div><p>Monofilament nets, Multifilament Nets, HDPE nets &amp; more</p></div>
+      </div>
+      <div class="hcard">
+        <div class="hcard-icon">🪢</div>
+        <div><div class="hcard-title">Premium Ropes</div><p>Nylon, PP, polyester &amp; natural fibre ropes</p></div>
+      </div>
+      <div class="hcard">
+        <div class="hcard-icon">🏪</div>
+        <div><div class="hcard-title">Wholesale &amp; Retail</div><p>Best prices for bulk orders and individual buyers</p></div>
+      </div>
+      <div class="hcard">
+        <div class="hcard-icon">🚚</div>
+        <div><div class="hcard-title">Pan-India Delivery</div><p>Fast shipping to your doorstep anywhere in India</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-bar">
+  <div class="tstat"><div class="tstat-num">Quality</div><div class="tstat-lbl">Quality Assured</div></div>
+  <div class="tdiv"></div>
+  <div class="tstat"><div class="tstat-num">Customer Service</div><div class="tstat-lbl">WhatsApp Support</div></div>
+  <div class="tdiv"></div>
+  <div class="tstat"><div class="tstat-num">50+</div><div class="tstat-lbl">Product Variants</div></div>
+  <div class="tdiv"></div>
+  <div class="tstat"><div class="tstat-num">Pan</div><div class="tstat-lbl">India Delivery</div></div>
+</div>
+
+<section class="about-sec sec" id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="sec-label">Who We Are</div>
+      <h2 class="sec-title">Your trusted partner<br>for <em>Nets &amp; Ropes</em></h2>
+      <p><strong>Kshthriya Nets &amp; Ropes</strong> is a well-established trading company based in Ongole, Andhra Pradesh, supplying premium fishing nets and ropes to fishermen, retailers, and wholesalers across India.</p>
+      <p>We source directly from <strong>leading manufacturers</strong>, ensuring the best quality at the most competitive prices. Single piece or bulk — we deliver with speed and reliability.</p>
+      <div class="pills">
+        <span class="pill">Fishing Nets</span><span class="pill">Nylon Ropes</span><span class="pill">PP Ropes</span>
+        <span class="pill">Bulk Orders</span><span class="pill">Custom Sizes</span><span class="pill">Wholesale</span>
+      </div>
+    </div>
+    <div class="reveal d2">
+      <div class="acard"><div class="acard-icon">🏭</div><div><h4>Direct from Manufacturers</h4><p>Sourced straight from top factories — no middlemen, better prices passed on to you.</p></div></div>
+      <div class="acard"><div class="acard-icon">✅</div><div><h4>Quality Assured</h4><p>Every batch is checked for mesh size, tensile strength, and material quality before dispatch.</p></div></div>
+      <div class="acard"><div class="acard-icon">📦</div><div><h4>Custom &amp; Bulk Supply</h4><p>Need a specific mesh size or quantity? We accommodate all custom and bulk requirements easily.</p></div></div>
+      <div class="acard"><div class="acard-icon">💬</div><div><h4>WhatsApp-First Service</h4><p>Instant quotes, order tracking, and support — all on WhatsApp for your convenience.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="nets-sec sec" id="nets">
+  <div class="reveal">
+    <div class="sec-label">Our Net Products</div>
+    <h2 class="sec-title">Fishing nets for<br><em>every method &amp; water</em></h2>
+  </div>
+  <div class="nets-grid">
+    <div class="ncard reveal">
+      <div class="nnum">01</div>
+      <h3>Monofilament Nets</h3>
+      <p>Premium transparent monofilament nets ideal for various fishing environments. Custom-made to your exact requirements—available in all sizes, with any specific mesh size and mesh depth you need.</p>
+      <div class="ntags"><span class="ntag">Monofilament</span><span class="ntag">Invisible</span><span class="ntag">All Mesh Sizes</span><span class="ntag">Custom Depth</span><span class="ntag">Sea &amp; River</span></div>
+    </div>
+    <div class="ncard reveal d1">
+      <div class="nnum">02</div>
+      <h3>Multifilament Nets</h3>
+      <p>Highly durable and flexible multifilament (nylon) nets built to handle heavy catches. We supply these in all dimensions, giving you full control over the exact mesh size and depth for your needs.</p>
+      <div class="ntags"><span class="ntag">High Strength</span><span class="ntag">Flexible</span><span class="ntag">All Sizes</span><span class="ntag">Hand Thrown</span><span class="ntag">Shallow Water</span><span class="ntag">Various Sizes</span></div>
+    </div>
+    <div class="ncard reveal d2">
+      <div class="nnum">03</div>
+      <h3>HDPE &amp; Other Nets</h3>
+      <p>Heavy-duty High-Density Polyethylene (HDPE) nets and any other specialty nets you require. We manufacture to your exact specifications with fully customizable lengths, mesh sizes, and depths.</p>
+      <div class="ntags"><span class="ntag">Heavy Duty</span><span class="ntag">Custom Built</span><span class="ntag">All Dimensions</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="ropes-sec sec" id="ropes">
+  <div class="ropes-grid">
+    <div class="reveal">
+      <div class="sec-label">Our Rope Products</div>
+      <h2 class="sec-title">Ropes built for<br><em>sea &amp; shore</em></h2>
+      <p>We stock a wide range of ropes suited for fishing, mooring, agriculture, and general utility — all sourced from trusted manufacturers and available in bulk.</p>
+      <div class="rope-list">
+        <div class="rope-item"><div class="rdot"></div><span class="rname">Polypropylene (PP) Ropes</span><span class="rdesc">Floats · UV resistant</span></div>
+        <div class="rope-item"><div class="rdot"></div><span class="rname">Nylon Ropes</span><span class="rdesc">Elastic · High strength</span></div>
+        <div class="rope-item"><div class="rdot"></div><span class="rname">Polyester Ropes</span><span class="rdesc">Low stretch · Durable</span></div>
+        <div class="rope-item"><div class="rdot"></div><span class="rname">HDPE Twines &amp; Ropes</span><span class="rdesc">Nets · Packaging</span></div>
+        <div class="rope-item"><div class="rdot"></div><span class="rname">Natural Fibre Ropes</span><span class="rdesc">Manila · Coir · Sisal</span></div>
+        <div class="rope-item"><div class="rdot"></div><span class="rname">Mooring &amp; Anchor Lines</span><span class="rdesc">Heavy duty · Marine</span></div>
+      </div>
+    </div>
+    <div class="reveal d2">
+      <div class="rcard">
+        <div class="rcard-top"><h4>🪢 Polypropylene Ropes</h4><span class="rbadge">Best Seller</span></div>
+        <p>Lightweight and buoyant — perfect for fishing boats, nets, and general marine use. Resistant to moisture, chemicals, and UV degradation.</p>
+        <div class="rspecs"><div class="rsp"><strong>4mm – 80mm</strong><span>Diameter</span></div><div class="rsp"><strong>3 &amp; 8 Strand</strong><span>Construction</span></div><div class="rsp"><strong>Floats</strong><span>In water</span></div></div>
+      </div>
+      <div class="rcard">
+        <div class="rcard-top"><h4>🔵 Nylon Ropes</h4><span class="rbadge">High Load</span></div>
+        <p>Strong, elastic, and shock-absorbing. Ideal for mooring lines, trawling, and applications requiring stretch and strength under dynamic load.</p>
+        <div class="rspecs"><div class="rsp"><strong>6mm – 100mm</strong><span>Diameter</span></div><div class="rsp"><strong>Double Braid</strong><span>Construction</span></div><div class="rsp"><strong>High</strong><span>Elasticity</span></div></div>
+      </div>
+      <div class="rcard">
+        <div class="rcard-top"><h4>🌿 Natural Fibre Ropes</h4><span class="rbadge">Eco Friendly</span></div>
+        <p>Coir, Manila, and Sisal ropes for traditional fishing, packaging, and agriculture. Biodegradable, readily available, and competitively priced.</p>
+        <div class="rspecs"><div class="rsp"><strong>6mm – 50mm</strong><span>Diameter</span></div><div class="rsp"><strong>3-Strand</strong><span>Construction</span></div><div class="rsp"><strong>Eco</strong><span>Friendly</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why-sec sec">
+  <div style="text-align:center" class="reveal">
+    <div class="sec-label">Why Choose Us</div>
+    <h2 class="sec-title">We make it <em>easy to buy</em></h2>
+  </div>
+  <div class="why-grid">
+    <div class="wcard reveal"><div class="wicon">🏭</div><div class="wnum">Top</div><h4>Manufacturer Sourced</h4><p>Direct tie-ups with leading net and rope manufacturers — best quality, best pricing.</p></div>
+    <div class="wcard reveal d1"><div class="wicon">💰</div><div class="wnum">Best</div><h4>Competitive Pricing</h4><p>Wholesale rates for bulk buyers, fair retail prices for individual fishermen.</p></div>
+    <div class="wcard reveal d2"><div class="wicon">📐</div><div class="wnum">50+</div><h4>Product Variants</h4><p>Wide range of mesh sizes, lengths, materials, and rope diameters always in stock.</p></div>
+    <div class="wcard reveal d3"><div class="wicon">⚡</div><div class="wnum">24hr</div><h4>Quick Dispatch</h4><p>Most orders packed and dispatched within 24 hours of order confirmation.</p></div>
+  </div>
+</section>
+
+<section class="cta-sec" id="cta">
+  <div class="cta-glow"></div>
+  <div class="cta-wavebot">
+    <svg viewBox="0 0 1440 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,45 C200,90 400,5 600,45 C800,85 1000,0 1200,45 L1440,45 L1440,90 L0,90 Z" fill="#0B6E7A"/>
+    </svg>
+  </div>
+  <div class="sec-label">Get In Touch</div>
+  <h2>Ready to order?<br>Let's talk on <em>WhatsApp</em></h2>
+  <p>Tell us what you need — net type, mesh size, mesh depth, rope diameter, quantity — and we'll send you the best price within minutes.</p>
+  <a href="https://wa.me/918106757893?text=Hello%20Kshthriya%20Nets%20%26%20Ropes!%20I%20want%20to%20enquire%20about%20your%20fishing%20nets%20and%20ropes." target="_blank" class="wa-big">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.558 4.112 1.528 5.832L.057 23.643a.5.5 0 0 0 .625.601l5.963-1.565A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.951 9.951 0 0 1-5.166-1.445l-.371-.22-3.547.93.957-3.455-.242-.378A9.955 9.955 0 0 1 2 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+    Chat on WhatsApp
+  </a>
+  <p class="cta-note">Available Mon–Sat · 9 am to 7 pm · Reply within minutes</p>
+</section>
+
+<footer>
+  <div>
+    <span class="flogo-name">Kshthriya Nets &amp; Ropes</span>
+    <span class="flogo-sub">Ongole, Andhra Pradesh, India</span>
+  </div>
+  <p>© 2025 Kshthriya Nets &amp; Ropes · All rights reserved</p>
+  <p>Fishing Nets · Ropes · Wholesale &amp; Retail</p>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
